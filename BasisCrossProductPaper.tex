@@ -2,6 +2,7 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{booktabs,multirow,makecell,tabularx}
 
 \newcommand{\bv}[1][]{e_{#1}}
 \newcommand{\bp}[2]{(#1,#2)}
@@ -49,7 +50,7 @@ Proof: An oriented basis on $n$-dimensional space corresponds to a directed comp
 \end{theorem}
 
 
-Some geometric intuition in support of the above proof: The complete graph on an ordered $n$-node space consists of the polygon defined by the nodes and all of its inscribed stars, as illustrated in Fig.~\ref{fig:polygonandstars}. On odd-dimensional spaces, this graph can be made into a rotationally-symmetric directed graph by assigning a traversal direction to the polygon and each of the stars. On even-numbered spaces, one of the stars is degenerate (cross-shaped) and cannot be followed without retracing another segment, so no symmetric graph can be constructed.
+Some geometric intuition in support of the above proof: The complete graph on an ordered $n$-node space consists of the polygon defined by the nodes and all of its inscribed stars, as illustrated in Figure~\ref{fig:polygonandstars}. On odd-dimensional spaces, this graph can be made into a rotationally-symmetric directed graph by assigning a traversal direction to the polygon and each of the stars. On even-numbered spaces, one of the stars is degenerate (cross-shaped) and cannot be followed without retracing another segment, so no symmetric graph can be constructed.
 
 \begin{figure}[tbp]
 \begin{center}
@@ -126,30 +127,80 @@ Such collisions occur when there exists a single directed star for which travers
 
 The conditions for this lack of overlapping sums are easily checked for the lowest-dimensional doubly-odd-dimensioned spaces:
 
-\paragraph{Three dimensions.} In three dimensions, the polygon-star set is just the polygon and it is its own ``next item" in the polygon-star ordering.. This polygon can be followed in either direction, such that the candidate cross product sequences and their collision tests are
+\paragraph{Three dimensions.} In three dimensions, the polygon-star set is just the polygon, which is thus its own ``next item" in the polygon-star ordering.. This polygon can be followed by incrementing the index count by one or two units (equivalently, indexing by one unit in either direction), with both the bivector-pairing and output-assignment traversals constrained to be in the same direction. 
+
+The candidate cross product sequences and their collision tests are given in Table~\ref{tab:3collisiontest}.
+%\begin{equation}
+%\begin{array}{c|c|c}
+%\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline\hline
+%1 & 1+1 = 2 & \text{Pass} \\
+%2 & 2 + 2 = 4 \equiv 1 &  \text{Pass}
+%\end{array}
+%\end{equation}
+%%
+Both candidate sequences pass, meaning that three-dimensional spaces admit the construction of two cross products distinguished by the order in which the basis elements are traversed, as illustrated in Figure~\ref{fig:CrossProducts3D}. These cross products are the traditional righthand-rule cross product
 \begin{equation}
-\begin{array}{c|c|c}
-\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline\hline
-\phantom{-}1 & 1+1 = 2 & \text{Pass} \\
-2 & 2 + 2 = 4 \equiv 1 &  \text{Pass}
-\end{array}
+\bv[i]\times\bv[i+1]=\bv[i+2]
 \end{equation}
-%
-and so three-dimensional spaces admit the construction of two cross products, distinguished by the order in which the basis elements are traversed: $\bv[1]\times\bv[2]=\bv[3]$ and $\bv[1]\times\bv[2]=-\bv[3]$.
+and the lefhand-rule cross product, which can be expressed as
+\begin{equation}
+\bv[i]\times\bv[i+2]=\bv[i+1] \qquad \text{or} \qquad \bv[i]\times\bv[i-1]=\bv[i-2] \qquad \text{or} \qquad \bv[i]\times\bv[i-1]=\bv[i+1].
+\end{equation}
+
+
+\begin{table}[tp]
+\caption{Collision tests for cross-product candidates in three dimensions.}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Polygon-star sequence & Collision tests & Validity \\\hline
+$1$ & $1+1 = 2$ & Pass \\
+$2$ & $2 + 2 = 4 \equiv 1$ &  Pass
+\end{tabular}
+\end{center}
+\label{tab:3collisiontest}
+\end{table}%
+
+\begin{figure}[tbp]
+\begin{center}
+\includegraphics[width=.75\textwidth]{CrossProducts3D.pdf}
+\caption{The two cross products that can be defined in three dimensions take the positive bivector pairings as either clockwise or counterclockwise, and the output as the next basis vector in the same direction around the triangle.}
+\label{fig:CrossProducts3D}
+\end{center}
+\end{figure}
+
+\clearpage
 
 
 \paragraph{Five dimensions.}
-In five dimensions, the polygon-star set is the pentagon and the pentagram, and cross product candidates assign to each leg of the pentagon the point reached by following the next leg of the pentagram, and vise versa. This construction means that all cross-product candidates on a five-dimensional space are self-colliding, with pairs of cross products $\bv[i]\times\bv[j1]$ and $\bv[i]\times\bv[j2]$ both mapping to the same $\bv[k]$, as illustrated in Fig.~\ref{fig:5collision} for the positively oriented pentagon cases. The full set of collision tests for the five-dimensional case is
+In five dimensions, the polygon-star set is the pentagon and the pentagram, and cross product candidates assign to each leg of the pentagon the point reached by following the next leg of the pentagram, and vise versa. This construction means that all cross-product candidates on a five-dimensional space are self-colliding, with pairs of cross products $\bv[i]\times\bv[j1]$ and $\bv[i]\times\bv[j2]$ both mapping to the same $\bv[k]$, as  detailed in Table~\ref{tab:5collisiontest}, and as illustrated in Figure~\ref{fig:5collision} for the positively oriented pentagon cases.
+% The full set of collision tests for the five-dimensional case is
 %
-\begin{equation}
-\begin{array}{c|c|c}
-\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline\hline
-12 & \begin{bmatrix}1+2= 3 \\ 2+1=3 \end{bmatrix} & \text{Fail} \\
-13 & \begin{bmatrix}1+3= 4 \\ 3+1=4 \end{bmatrix} &  \text{Fail} \\
-42 & \begin{bmatrix}4+2= 6\equiv{1} \\ 2+4=6\equiv{1} \end{bmatrix} & \text{Fail} \\
-43 & \begin{bmatrix}4+3= 7\equiv{2} \\ 3+4=7\equiv{2} \end{bmatrix} &  \text{Fail} \\
-\end{array}
-\end{equation}
+%\begin{equation}
+%\begin{array}{c|c|c}
+%\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline\hline
+%12 & \begin{bmatrix}1+2= 3 \\ 2+1=3 \end{bmatrix} & \text{Fail} \\
+%13 & \begin{bmatrix}1+3= 4 \\ 3+1=4 \end{bmatrix} &  \text{Fail} \\
+%42 & \begin{bmatrix}4+2= 6\equiv{1} \\ 2+4=6\equiv{1} \end{bmatrix} & \text{Fail} \\
+%43 & \begin{bmatrix}4+3= 7\equiv{2} \\ 3+4=7\equiv{2} \end{bmatrix} &  \text{Fail} \\
+%\end{array}
+%\end{equation}
+
+\begin{table}[tp]
+\caption{Collision tests for cross-product candidates in five dimensions.}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Polygon-star sequence & Collision tests & Validity \\\hline
+$12$ & $\begin{bmatrix}1+2= 3 \\ 2+1=3 \end{bmatrix}$ & Fail \\
+$13$ & $\begin{bmatrix}1+3= 4 \\ 3+1=4 \end{bmatrix}$ &  Fail \\
+$42$ & $\begin{bmatrix}4+2= 6\equiv{1} \\ 2+4=6\equiv{1} \end{bmatrix}$ & Fail \\
+$43$ & $\begin{bmatrix}4+3= 7\equiv{2} \\ 3+4=7\equiv{2} \end{bmatrix}$ &  Fail \\
+\end{tabular}
+\end{center}
+\label{tab:5collisiontest}
+\end{table}%
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -159,26 +210,64 @@ In five dimensions, the polygon-star set is the pentagon and the pentagram, and 
 \end{center}
 \end{figure}
 
+\clearpage
 
+\paragraph{Seven dimensions.} In seven dimensions, there are two inscribed stars: a ``wide" star in which each edge increases the index count by two or by five (negative two in a seven-element cycle), and a ``narrow" star which increases the index count by three or four. 
 
-\paragraph{Seven dimensions.} In seven dimensions (the next-smallest doubly-odd space), there are two stars: a ``wide" star in which each edge increases the index count by two or by five (negative two in a seven-element cycle), and a ``narrow" star which increases the index count by three or four. The candidate cross products and their collision tests with the polygon counting forward and a polygon-wide narrow order are
-\begin{equation}
-\begin{array}{c|c|c}
-\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
-1 2 3 & 1+2 = 3 & \text{Fail} \\% \hline 
-1 2 4 & \begin{bmatrix} 1+2=3 \\ 2+4=6 \\ 4+1 = 5 \end{bmatrix} &  \text{Pass}\\
-1 5 3 & 5+3=8\equiv1 & \text{Fail} \\
-1 5 4 & 4+1=5 & \text{Fail} \\
-\end{array}
-\end{equation}
-with only a single candidate producing a valid cross product,
+The candidate cross products and their collision tests with the a positive polygon direction and a polygon-wide-narrow ordering are detailed in the first block of Table~\ref{tab:7collisiontest}.
+%
+\begin{table}[tp]
+\caption{Collision tests for cross-product candidates in seven dimensions.}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\multicolumn{2}{c}{Polygon-star sequence} & Collision tests & Validity \\\hline
+\multirow{6}{*}{\makecell{Polygon $+$ \\ Wide star $\pm$ \\ Narrow star $\pm$}}
+&$1 2 3$ & $1+2 = 3$ & \text{Fail} \\% \hline 
+&$1 2 4$ & $\begin{bmatrix} 1+2=3 \\ 2+4=6 \\ 4+1 = 5 \end{bmatrix}$ &  \text{Pass}\\
+&$1 5 3$ & $5+3=8\equiv1$ & \text{Fail} \\
+&$1 5 4$ & $4+1=5$ & \text{Fail} \\ \hline 
+%
+\multirow{6}{*}{\makecell{Polygon $-$ \\ Wide star $\pm$ \\ Narrow star $\pm$}}
+&$6 2 3$ & $1+2 = 6+3=9\equiv2$ & \text{Fail} \\% \hline 
+&$6 2 4$ & $2+4=6$ & \text{Fail}\\
+&$6 5 3$ & $\begin{bmatrix} 6+5=11\equiv4 \\ 5+3=8\equiv1 \\ 3+9=9\equiv2 \end{bmatrix}$ &  \text{Pass} \\
+&$6 5 4$ & $6+5=11\equiv4$ & \text{Fail} \\ \hline
+%
+\multirow{6}{*}{\makecell{Polygon $+$ \\ Narrow star $\pm$ \\ Wide star $\pm$ }}
+&$1 3 2$ & $1+2 = 3$ & \text{Fail} \\% \hline 
+&$1 4 2$ & $\begin{bmatrix} 1+2=3 \\ 2+4=6 \\ 4+1 = 5 \end{bmatrix}$ &  \text{Pass}\\
+&$1 3 5$ & $5+3=8\equiv1$ & \text{Fail} \\
+&$1 4 5$ & $4+1=5$ & \text{Fail} \\ \hline
+%
+\multirow{6}{*}{\makecell{Polygon $-$ \\ Narrow star $\pm$ \\ Wide star $\pm$ }}
+&$6 3 2$ & $1+2 = 6+3=9\equiv2$ & \text{Fail} \\% \hline 
+&$6 4 2$ & $2+4=6$ & \text{Fail}\\
+&$6 3 5$ & $\begin{bmatrix} 6+5=11\equiv4 \\ 5+3=8\equiv1 \\ 3+9=9\equiv2 \end{bmatrix}$ &  \text{Pass} \\
+&$6 4 5$ & $6+5=11\equiv4$ & \text{Fail} \\
+\end{tabular}
+\end{center}
+\label{tab:7collisiontest}
+\end{table}
+%
+%\begin{equation}
+%\begin{array}{c|c|c}
+%\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
+%1 2 3 & 1+2 = 3 & \text{Fail} \\% \hline 
+%1 2 4 & \begin{bmatrix} 1+2=3 \\ 2+4=6 \\ 4+1 = 5 \end{bmatrix} &  \text{Pass}\\
+%1 5 3 & 5+3=8\equiv1 & \text{Fail} \\
+%1 5 4 & 4+1=5 & \text{Fail} \\
+%\end{array}
+%\end{equation}
+Three out of these four candidates have collisions (with the collisions for the $123$ sequence illustrated in Figure~\ref{fig:7collision}), and only a single candidate from this set (illustrated in Figure~\ref{fig:7nocollision}) produces a valid cross product,
 \begin{subequations}
 \begin{align}
-\bv[i]\times\bv[i+1] = \bv[i+3] \\
-\bv[i]\times\bv[i+2] = \bv[i+6] \\
-\bv[i]\times\bv[i+4] = \bv[i+6]
+\bv[i]\times\bv[i+1] &= \bv[i+3] \\
+\bv[i]\times\bv[i+2] &= \bv[i+6] \\
+\bv[i]\times\bv[i+4] &= \bv[i+5]
 \end{align}
 \end{subequations}
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -196,65 +285,66 @@ with only a single candidate producing a valid cross product,
 \end{center}
 \end{figure}
 
-Changing the direction of the polygon traversal,
-\begin{equation}
-\begin{array}{c|c|c}
-\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
-6 2 3 & 1+2 = 6+3=9\equiv2 & \text{Fail} \\% \hline 
-6 2 4 & 2+4=6 & \text{Fail}\\
-6 5 3 &  \begin{bmatrix} 6+5=11\equiv4 \\ 5+3=8\equiv1 \\ 3+9=9\equiv2 \end{bmatrix} &  \text{Pass} \\
-6 5 4 &6+5=11\equiv4 & \text{Fail} \\
-\end{array}
-\end{equation}
+Flipping the direction of the polygon traversal
+%,
+%\begin{equation}
+%\begin{array}{c|c|c}
+%\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
+%6 2 3 & 1+2 = 6+3=9\equiv2 & \text{Fail} \\% \hline 
+%6 2 4 & 2+4=6 & \text{Fail}\\
+%6 5 3 &  \begin{bmatrix} 6+5=11\equiv4 \\ 5+3=8\equiv1 \\ 3+9=9\equiv2 \end{bmatrix} &  \text{Pass} \\
+%6 5 4 &6+5=11\equiv4 & \text{Fail} \\
+%\end{array}
+%\end{equation}
  again leaves only a single candidate that produces a valid cross product,
  \begin{subequations}
 \begin{align}
-\bv[i]\times\bv[i+6] = \bv[i+4] \\
-\bv[i]\times\bv[i+5] = \bv[i+1] \\
-\bv[i]\times\bv[i+3] = \bv[i+2],
+\bv[i]\times\bv[i+6] &= \bv[i+4] \\
+\bv[i]\times\bv[i+5] &= \bv[i+1] \\
+\bv[i]\times\bv[i+3] &= \bv[i+2],
 \end{align}
 \end{subequations}
  which is the sign reversal of all traversals in the original passing candidate.
 
-Changing the order of the polygon-star sequences as
-\begin{equation}
-\begin{array}{c|c|c}
-\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
-1 3 2& 1+2 = 3 & \text{Fail} \\% \hline 
-1 4 2 & \begin{bmatrix} 1+2=3 \\ 2+4=6 \\ 4+1 = 5 \end{bmatrix} &  \text{Pass}\\
-1 3 5  & 5+3=8\equiv1 & \text{Fail} \\
-1 4 5 & 4+1=5 & \text{Fail} \\
-\end{array}
-\end{equation}
-and
-\begin{equation}
-\begin{array}{c|c|c}
-\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
-6 3 2 & 1+2 = 6+3=9\equiv2 & \text{Fail} \\% \hline 
-6 4 2 & 2+4=6 & \text{Fail}\\
-6 3 5 &  \begin{bmatrix} 6+5=11\equiv4 \\ 5+3=8\equiv1 \\ 3+9=9\equiv2 \end{bmatrix} &  \text{Pass} \\
-6 4 5 &6+5=11\equiv4 & \text{Fail} \\
-\end{array}
-\end{equation}
+Changing the order of the polygon-star sequences
+%\begin{equation}
+%\begin{array}{c|c|c}
+%\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
+%1 3 2& 1+2 = 3 & \text{Fail} \\% \hline 
+%1 4 2 & \begin{bmatrix} 1+2=3 \\ 2+4=6 \\ 4+1 = 5 \end{bmatrix} &  \text{Pass}\\
+%1 3 5  & 5+3=8\equiv1 & \text{Fail} \\
+%1 4 5 & 4+1=5 & \text{Fail} \\
+%\end{array}
+%\end{equation}
+%and
+%\begin{equation}
+%\begin{array}{c|c|c}
+%\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
+%6 3 2 & 1+2 = 6+3=9\equiv2 & \text{Fail} \\% \hline 
+%6 4 2 & 2+4=6 & \text{Fail}\\
+%6 3 5 &  \begin{bmatrix} 6+5=11\equiv4 \\ 5+3=8\equiv1 \\ 3+9=9\equiv2 \end{bmatrix} &  \text{Pass} \\
+%6 4 5 &6+5=11\equiv4 & \text{Fail} \\
+%\end{array}
+%\end{equation}
  again produces a single valid cross product for each polygon traversal direction,
   \begin{subequations}
 \begin{align}
-\bv[i]\times\bv[i+1] = \bv[i+3] \\
-\bv[i]\times\bv[i+4] = \bv[i+6] \\
-\bv[i]\times\bv[i+2] = \bv[i+5],
+\bv[i]\times\bv[i+1] &= \bv[i+3] \\
+\bv[i]\times\bv[i+4] &= \bv[i+6] \\
+\bv[i]\times\bv[i+2] &= \bv[i+5],
 \end{align}
 \end{subequations}
 and
 \begin{subequations}
 \begin{align}
-\bv[i]\times\bv[i+6] = \bv[i+4] \\
-\bv[i]\times\bv[i+3] = \bv[i+1] \\
-\bv[i]\times\bv[i+5] = \bv[i+2],
+\bv[i]\times\bv[i+6] &= \bv[i+4] \\
+\bv[i]\times\bv[i+3] &= \bv[i+1] \\
+\bv[i]\times\bv[i+5] &= \bv[i+2],
 \end{align}
 \end{subequations}
- with the interesting feature that changing the order of the polygon-star sequence, while producing distinct cross products, does not change the set of star directions needed to produce a valid cross product -- all the valid cases are either re-orderings of $124$ or $635\equiv-(124)$.
+ with the interesting feature that changing the order of the polygon-star sequence, while producing distinct cross products, does not change the set of star directions needed to produce a valid cross product -- all the valid cases are either re-orderings of $124$ or $635$, with the second set equivalent to flipping all the traversal directions on the first set.
 
-Taking these validity tests together, we see that the $2^{(7-1)/2)} = 2^(3)$  direction-permutations for bivector pairings on seven-dimensional space are reduced to just $2$ sets of signs that correspond to valid cross products (which is consistent with the two signs we found for the cross product in three dimensions), and that the $(\frac{7-1}{2} -1)! = 2$ permutations of the polygon-star order produce distinct valid cross products. Combining this with the $(7-2)! = 120 $ edge-fixed permutations of the basis ordering, we can conclude that there are
+Taking these validity tests together, we see that the $2^{(7-1)/2)} = 2^{(3)}$  direction-permutations for bivector pairings on seven-dimensional space are reduced to just $2$ sets of signs that correspond to valid cross products (which is consistent with the two signs we found for the cross product in three dimensions), and that the $(\frac{7-1}{2} -1)! = 2$ permutations of the polygon-star order produce distinct valid cross products. Combining this with the $(7-2)! = 120 $ edge-fixed permutations of the basis ordering, we can conclude that there are
 \begin{equation}
 2 \cdot 2 \cdot 120 = 480
 \end{equation}
@@ -266,20 +356,22 @@ distinct bivector pairings in seven-dimensional space, which is consistent with 
 
 \subsection{Higher-dimensional spaces}
 
-Beyond confirming the previous results that geometrically consistent cross products can be defined in seven dimensions, we can extend our reasoning above to also rule out the possibility of such a cross product existing in dimensions greater than seven.
+Beyond confirming the previous results that geometrically consistent cross products can be defined in seven dimensions but not five, we can extend our reasoning above to demonstrate the impossibility of such a cross product existing in dimensions greater than seven.
 
-Based on the  analysis, we can restrict our attention to direction-order sequences starting with 1 and with stars ordered by their increasing increment when followed in the same direction as the polygon. The general form of such sequences is
+To start, we observe that the polygon-star sequences for an $n$-dimensional space (with $n$ odd) can be constructed by taking either the top or bottom element from each entry in
+\begin{equation}
+\frac{1}{n-1}\hspace{1em}\frac{2}{n-2} \hspace{1em} \frac{3}{n-3}\hspace{1em} \cdots \hspace{1em} \frac{(n-1)/2 -1}{(n-1)/2 +2} \hspace{1em} \frac{(n-1)/2}{(n-1)/2 +1},
+\end{equation}
+where the pairs of entries correspond to the positive and negative directions around each polygon or star.
+
+Because of the direction-reversal symmetry in the collision condition, we can restrict our attention to direction-order sequences starting with 1,
 %
 \begin{equation}
 1\hspace{1em}\frac{2}{n-2} \hspace{1em} \frac{3}{n-3}\hspace{1em} \cdots \hspace{1em} \frac{(n-1)/2 -1}{(n-1)/2 +2} \hspace{1em} \frac{(n-1)/2}{(n-1)/2 +1}
 \end{equation}
-with either the positive (top) or negative (bottom) parity element selected from each pair.
-
-
-Three conditions on these sequences together ensure that there are no paths through the sequence that produce valid cross products: 
+Three conditions on these sequences together prevent there from being any paths through this sequence that produce valid cross products: 
 \begin{enumerate}
-\item Paths through this sequence that produce valid cross products must alternate parity, because equences that contain consecutive elements with the same parity fail the validity test, because one of those numbers will sum with $1$ to produce the other.
-\item Paths through this sequence that produce valid cross products cannot start with $n-2$, because with alternating parity, the next element is $3$, and  $(n-2)+3 \equiv 1$, making these sequences invalid.
+\item Paths through this sequence that produce valid cross products must alternate between positive/negative direction elements, because sequences that contain consecutive elements with the same direction fail the validity test, because one of those numbers will sum with $1$ to produce the other. \item Paths through this sequence that produce valid cross products cannot start with $n-2$, because with alternating direction, the next element is $3$, and  $(n-2)+3 \equiv 1$, making these sequences invalid.
 \item Paths through this sequence that produce valid cross products cannot start with $2$, because with alternating parity, the last two elements are 
 $(n-1)/2 -1$ and $(n-1)/2 +1$ or $(n-1)/2 +2 $ and $(n-1)/2$, both of which are separated by $2$, again making the sequences invalid, and leaving no remaining candidates.
 \end{enumerate}
