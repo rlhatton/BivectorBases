@@ -131,11 +131,34 @@ The conditions for this lack of overlapping sums are easily checked for the lowe
 \begin{array}{c|c|c}
 \text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline\hline
 \phantom{-}1 & 1+1 = 2 & \text{Pass} \\
--1 & -1 + (-1) = -2 &  \text{Pass}
+2 & 2 + 2 = 4 \equiv 1 &  \text{Pass}
 \end{array}
 \end{equation}
 %
-such that three-dimensional spaces admit the construction of two cross products, distinguished by the order in which the basis elements are traversed: $\bv[1]\times\bv[2]=\bv[3]$ and $\bv[1]\times\bv[2]=-\bv[3]$.
+and so three-dimensional spaces admit the construction of two cross products, distinguished by the order in which the basis elements are traversed: $\bv[1]\times\bv[2]=\bv[3]$ and $\bv[1]\times\bv[2]=-\bv[3]$.
+
+
+\paragraph{Five dimensions.}
+In five dimensions, the polygon-star set is the pentagon and the pentagram, and cross product candidates assign to each leg of the pentagon the point reached by following the next leg of the pentagram, and vise versa. This construction means that all cross-product candidates on a five-dimensional space are self-colliding, with pairs of cross products $\bv[i]\times\bv[j1]$ and $\bv[i]\times\bv[j2]$ both mapping to the same $\bv[k]$, as illustrated in Fig.~\ref{fig:5collision} for the positively oriented pentagon cases. The full set of collision tests for the five-dimensional case is
+%
+\begin{equation}
+\begin{array}{c|c|c}
+\text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline\hline
+12 & \begin{bmatrix}1+2= 3 \\ 2+1=3 \end{bmatrix} & \text{Fail} \\
+13 & \begin{bmatrix}1+3= 4 \\ 3+1=4 \end{bmatrix} &  \text{Fail} \\
+42 & \begin{bmatrix}4+2= 6\equiv{1} \\ 2+4=6\equiv{1} \end{bmatrix} & \text{Fail} \\
+43 & \begin{bmatrix}4+3= 7\equiv{2} \\ 3+4=7\equiv{2} \end{bmatrix} &  \text{Fail} \\
+\end{array}
+\end{equation}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.85\textwidth]{Collisions5D.pdf}
+\caption{All cross-product candidates on a five-dimensional space are self-colliding, because they involve moving once along the polygon and once along the pentagram, in the same direction for both pentagon legs and both pentagram legs}
+\label{fig:5collision}
+\end{center}
+\end{figure}
+
 
 
 \paragraph{Seven dimensions.} In seven dimensions (the next-smallest doubly-odd space), there are two stars: a ``wide" star in which each edge increases the index count by two or by five (negative two in a seven-element cycle), and a ``narrow" star which increases the index count by three or four. The candidate cross products and their collision tests with the polygon counting forward and a polygon-wide narrow order are
@@ -148,7 +171,30 @@ such that three-dimensional spaces admit the construction of two cross products,
 1 5 4 & 4+1=5 & \text{Fail} \\
 \end{array}
 \end{equation}
-with only a single candidate producing a valid cross product.
+with only a single candidate producing a valid cross product,
+\begin{subequations}
+\begin{align}
+\bv[i]\times\bv[i+1] = \bv[i+3] \\
+\bv[i]\times\bv[i+2] = \bv[i+6] \\
+\bv[i]\times\bv[i+4] = \bv[i+6]
+\end{align}
+\end{subequations}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.85\textwidth]{Collisions7D.pdf}
+\caption{Some cross-product candidates on a seven-dimensional space are self-colliding, with the cross products whose first and second arguments are $\bv[i]$ both producing the same output basis element. Here, with a polygon-star ordering $123$, both $\bv[1]\times\bv[2]$ and $\bv[6]\times\bv[1]$ map to $\bv[4]$, meaning that this ordering does not define a valid cross product.}
+\label{fig:7collision}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.85\textwidth]{NoCollisions7D.pdf}
+\caption{Changing the polygon-star ordering from $123$ to $124$ eliminates the collision, making each cross}
+\label{fig:7nocollision}
+\end{center}
+\end{figure}
 
 Changing the direction of the polygon traversal,
 \begin{equation}
@@ -160,9 +206,17 @@ Changing the direction of the polygon traversal,
 6 5 4 &6+5=11\equiv4 & \text{Fail} \\
 \end{array}
 \end{equation}
- again leaves only a single candidate that produces a valid cross product, which is the sign reversal of all traversals in the original passing candidate.
+ again leaves only a single candidate that produces a valid cross product,
+ \begin{subequations}
+\begin{align}
+\bv[i]\times\bv[i+6] = \bv[i+4] \\
+\bv[i]\times\bv[i+5] = \bv[i+1] \\
+\bv[i]\times\bv[i+3] = \bv[i+2],
+\end{align}
+\end{subequations}
+ which is the sign reversal of all traversals in the original passing candidate.
 
-Changing the order of the polygon-star sequence again produces a single valid cross product for each polygon traversal direction,
+Changing the order of the polygon-star sequences as
 \begin{equation}
 \begin{array}{c|c|c}
 \text{Polygon-star sequence} & \text{Collision tests} & \text{Validity} \\\hline \hline
@@ -182,7 +236,23 @@ and
 6 4 5 &6+5=11\equiv4 & \text{Fail} \\
 \end{array}
 \end{equation}
-with the interesting feature that changing the order of the polygon-star sequence, while producing a distinct cross product, does not change the set of stars needed to produce a valid cross product.
+ again produces a single valid cross product for each polygon traversal direction,
+  \begin{subequations}
+\begin{align}
+\bv[i]\times\bv[i+1] = \bv[i+3] \\
+\bv[i]\times\bv[i+4] = \bv[i+6] \\
+\bv[i]\times\bv[i+2] = \bv[i+5],
+\end{align}
+\end{subequations}
+and
+\begin{subequations}
+\begin{align}
+\bv[i]\times\bv[i+6] = \bv[i+4] \\
+\bv[i]\times\bv[i+3] = \bv[i+1] \\
+\bv[i]\times\bv[i+5] = \bv[i+2],
+\end{align}
+\end{subequations}
+ with the interesting feature that changing the order of the polygon-star sequence, while producing distinct cross products, does not change the set of star directions needed to produce a valid cross product -- all the valid cases are either re-orderings of $124$ or $635\equiv-(124)$.
 
 Taking these validity tests together, we see that the $2^{(7-1)/2)} = 2^(3)$  direction-permutations for bivector pairings on seven-dimensional space are reduced to just $2$ sets of signs that correspond to valid cross products (which is consistent with the two signs we found for the cross product in three dimensions), and that the $(\frac{7-1}{2} -1)! = 2$ permutations of the polygon-star order produce distinct valid cross products. Combining this with the $(7-2)! = 120 $ edge-fixed permutations of the basis ordering, we can conclude that there are
 \begin{equation}
