@@ -6,6 +6,8 @@
 
 \newcommand{\bv}[1][]{e_{#1}}
 \newcommand{\bp}[2]{(#1,#2)}
+\newcommand{\vc}[1][]{v_{#1}}
+\newcommand{\norm}[1]{\left|#1\right|}
 
 \newtheorem{theorem}{Theorem}[section]
 
@@ -22,7 +24,29 @@ A bivector basis is an ordered pairing of pairs of basis vectors. Each pair of v
 
 Closely related to the question of constructing cyclic bivector bases on a space is the question of constructing a vector cross product on a space. 
 
-\section{Cyclic Bivector Bases}
+\section{Vector and Bivector Bases}
+
+Vector basis: Select a set of $n$ orthogonal unit vectors to define oriented directions. Any vector can thus be described as a sum of the 
+
+Bivector basis: A set of oriented planes defined by ordered pairs of elements from the vector basis. Canonically, the positive side of the bivector basis element  $\bp{\bv[a]}{\bv[b]}$ is the side from which $\bv[b]$ is seen as being at a counterclockwise right angle from $\bv[b]$.\footnote{This is the planar righthand rule for orientation (which is related to, but distinct from, the righthand rule for selecting a bivector basis discussed later in this section). Using a lefthanded rule in which $\bv[b]$ is clockwise from $\bv[a]$ changes the sign of the basis but also the signs of bivector-valued functions relative to the basis, so that calculations made with them remain unchanged.} For example, Figure~\ref{fig:lowdimensionalbases} illustrates two bivector bases in each of two-dimensional and three-dimensional space, where different choices of which basis vector in each pair is first in the bivector flip the bivector's orientation.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.75\textwidth]{Low-dimensionalbases}
+\caption{Bivector bases are composed of oriented sets of two basis vectors, and define oriented areas basis areas in the planes containing those vectors. The sign of this orientation depends on the order in which the basis vectors are paired, so that if $\bv[1]$ is pointing right and $\bv[2]$ is pointing out, we are viewing the positive side of $\bp{\bv[1]}{\bv[2]}$ and the negative side of $\bp{\bv[1]}{\bv[2]}$. Similarly, in three dimensions constructing the basis with the cyclic ordering $\bp{\bv[3]}{\bv[1]}$ or the lexigraphic ordering $\bp{\bv[1]}{\bv[3]}$ flips the sign of the corresponding bivector basis element.}
+\label{fig:lowdimensionalbases}
+\end{center}
+\end{figure}
+
+
+On $n$-dimensional space, there are $n(n-1)$ pairs of basis vectors, each of which could be used in either order to construct the bivector basis, resulting in $2^{n(n-1)}$ possible sets of bivector bases corresponding to any given vector basis. A convenient visualization of 
+
+%By convention, the reference-positive side of the plane defined by $\bv[a]$ and $\bv[b]$ is the side from which $\bv[b]$ is seen as being at a counterclockwise right angle from $\bv[b]$. If the bivector $\bp{\bv[a]}{\bv[b]}$ is positive, then its positive side matches the positive side of the reference basis; if it is negative then the positive and negative sides are flipped relative to the reference basis
+
+\subsection{Ordered Bases}
+
+\subsection{Cyclic Bivector Bases}
+\label{sec:cyclicbivector}
 
 
 A cyclically oriented bivector basis is one in which the area basis elements are symmetric with respect to cyclic permutation of the basis elements. For example, consider a vector basis $\bv[a]$, $\bv[b]$, $\bv[c]$, which we will initially label as $\bv[1]$, $\bv[2]$, $\bv[3]$. 
@@ -45,7 +69,7 @@ It is not immediately apparent, however, \emph{why} we cannot extend the right h
 
 \begin{theorem}{Cyclically oriented bases can only be constructed on odd-dimensional spaces.}
 
-Proof: An oriented basis on $n$-dimensional space corresponds to a directed complete graph with $n$ nodes. Cyclic orientation with respect to an ordering of the nodes additionally requires that this graph be rotationally symmetric. A necessary condition for rotational symmetry is that there are no sources or sinks in the graph, i.e., that the graph contains (equivalently, that its edges can be induced by) an Eulerian circuit through the $n$ nodes. As per Euler’s theorem, this condition is only possible in a graph with an even number of edges on each node; for a complete graph, this means that there must be an odd number of nodes, and thus that it must correspond to an odd-dimensional space.
+Proof: An oriented basis on $n$-dimensional space corresponds to a directed complete graph with $n$ nodes. Cyclic orientation with respect to an ordering of the nodes additionally requires that this graph be rotationally symmetric. A necessary condition for rotational symmetry is that there are no sources or sinks in the graph, i.e., that the directed graph can be constructed by following an Eulerian circuit through the $n$ nodes. As per Euler’s theorem, this condition is only possible in a graph with an even number of edges on each node; for a complete graph, this means that there must be an odd number of nodes, and thus that it must correspond to an odd-dimensional space.
 
 \end{theorem}
 
@@ -68,7 +92,9 @@ Some geometric intuition in support of the above proof: The complete graph on an
 
 Proof: The polygon and its inscribed stars are together $\frac{n-1}{2}$ loops, which can individually be traversed in any direction, for a total of $2^{(n-1)/2}$ loop sign combinations. 
 %There are $(\frac{n-1}{2} -1)!$ cyclic order permutations in which the polygon stars can be traversed. 
-Taking the first two points as fixed, there are $(n-2)!$ order-permutations of the other points. (Taking only the first point as fixed would double-count with some of the sign reversals.)% or star-order swaps.)
+
+There are $(n-2)!$ distinct permutations of how we can assign
+Taking the first two points as fixed, there are $(n-2)!$ permutations of how we assign the basis vectors to poin. Taking only the first point as fixed and including permutations of the second pwould double-count with some of the sign reversals, as illustrated for two examples in five dimensions in Figure~\ref{fig:noneedtopermute}.% or star-order swaps.)
 
 \end{theorem}
 
@@ -79,20 +105,80 @@ Taking the first two points as fixed, there are $(n-2)!$ order-permutations of t
 \caption{%When calculating the number of independent cyclic bivectors we can construct on a space, we can fix one edge of the graph (the selection of $\bv[1]$ and $\bv[2]$ as a reference, and thus and only need to consider permutations of the remaining $n-2$ basis vectors. 
 Permutations that change the choice of $\bv[2]$ produce the same directed graph as is produced by some combination of permutations of the $n-2$ other nodes and flipping the signs with which the polygon and stars are traversed. For example, on a five-dimensional space, (top) swapping $\bv[2]$ and $\bv[5]$ while maintaining the directions of both cycles is equivalent to swapping $\bv[3]$ and $\bv[4]$ while flipping the directions of both the pentagon and the pentagram, and (bottom) swapping $\bv[2]$ and $\bv[5]$ and maintaining the directions of both cycles is equivalent to swapping $\bv[3]$, $\bv[4]$, and $\bv[5]$ while flipping the direction of the pentagram.
 }
-\label{default}
+\label{fig:noneedtopermute}
 \end{center}
 \end{figure}
 
-
+\clearpage
 \section{Cross product}
 
-The standard requirements for a cross product are that it is
+The standard definition for a cross product is that it is a bilinear map taking pairs of vectors to a third vector, 
+\begin{equation}
+\vc[a] \times \vc[b] = \vc[c],
+\end{equation}
+with this product satisfying two additional properties,
+\begin{itemize}
+\item \textbf{Orthogonality}: The cross product of two vectors must be orthogonal to those vectors,
+\begin{equation}
+\vc[a] \cdot (\vc[a]\times\vc[b]) = \mathbf{0}
+\end{equation}
+\item \textbf{Area magnitude}: The magnitude of the cross product between two vectors is equal to the area of the parallelogram they define,
+\begin{equation}
+\norm{\vc[a]\times\vc[b]} = \norm{\vc[a]}\norm{\vc[b]}\sin\theta,
+\end{equation}
+where $\theta$ is the angle between the vectors.
+\end{itemize}
+This definition has a number of well-known consequences, in particular 
+%\begin{itemize}
+%\item \textbf{Anticommutativity}: 
+that the cross product operation must be anticommutative (or ``alternating"), such that reversing the order in which vectors are crossed flips the sign of the output,
+\begin{equation}
+\vc[i]\times\vc[j] = -(\vc[j]\times\vc[i]).
+\end{equation}
+%\end{itemize}
 
-Bilinear, orthogonal, and have magnitude equal to the product of the magnitudes when the input vectors are orthogonal, with consequences of anticommutativity and the other identities
+In three dimensions, each pair of vectors has a unique normal direction (up to the choice of sign), so there are two cross-product functions that can be constructed on three-dimensional space -- the standard ``right-hand rule" cross product and its counterpart, which flips the sign of the output. In spaces with more than three dimensions, however, any pair of vectors has multiple normal vectors, and the definition of the cross product potentially admits multiple functions that differ by more than the sign of the output. This situation naturally leads to the questions
+\begin{itemize}
+\item What spaces beyond three-dimensions admit cross products?
+\item How many cross products can be defined on such spaces?
+\end{itemize}
 
-In the context of our bivector basis discussion above, we can equivalently describe a cross product as an operation that assigns a basis vector to each basis bivector, $\bp{\bv[i]}{\bv[j]} \rightarrow \bv[k], k\neq i,j$. For geometric consistency under cyclic relabeling of the basis vectors, both the construction of the basis and the assignment must be rotationally symmetric on the graph. All such constructions correspond to assigning a cyclic order to the inscribed stars on the graph and a traversal direction for each, then for each bivector edge in one star, finding $\bv[k]$ by continuing one edge from $\bv[j]$ in the next star.
+Previous work in this area has proved that three and seven are the only dimensions that admit a cross product, and that on seven-dimensional spaces there are $480$ distinct cross products that can be constructed. The standard proofs for these facts rely on properties related to the rotations of quaternions and octonions (each one dimension higher than the spaces that admit cross products) or on the projective geometry of the Fano plane. In the remainder of this paper, we will demonstrate that these conclusions about the existence and number of cross products in $n$-dimensional spaces can be reached simply from the properties of graphs with $n$ nodes.
 
-\subsection{Spaces that could admit a cross product}
+\begin{enumerate}
+\item Candidate cross products can only be defined on spaces of odd-dimension.
+\item Candidate cross products can only be defined on spaces of ``doubly odd" dimension (with $(n-1)/2$ odd), or on five-dimensional space.
+\item None of the five-dimensional candidates produce valid cross products.
+\item Several of the seven-dimensional candidates do produce valid cross products.
+\item None of the candidates from spaces of greater than seven dimensions can possibly produce a valid cross product.
+\end{enumerate}
+
+\subsection{Cross product definition tables}
+The bilinear aspect of a cross product means that it can be defined by specifying a multiplication table in which each pair of basis vectors $\bv[i]$ and $\bv[j]$ maps to a third basis vector $\bv[k]$,
+\begin{equation}
+\bv[i] \times \bv[j] = \bv[k],
+\end{equation}
+such that each component of the output vector can be found by summing the corresponding component products of the inputs and subtracting the reversed-order component products,
+\begin{equation}
+\vc[c]^{k} = \sum_{\bv[i] \times \bv[j] = \bv[k]} \vc[a]^{i} \vc[b]^{j} - \vc[a]^{j} \vc[b]^{i}.
+\end{equation}
+Cross products are geometrically distinct from each other (meaning that the planes defined by each bivector are assigned a different set of positive/negative orientations) if their multiplication tables are different from each other, and equivalent to each other if they result in the same assignment of orientations.
+
+% Permutations of a multiplication table 
+
+%f we take the $i$ and $j$ entries of the multiplication table as corresponding to abstract vectors fixed in the world, then each table corresponds to a different set of assignments of positive/negative direction to the plane defined by the vector pair
+
+\subsection{Cross products as directed complete graphs}
+
+In the context of our bivector basis discussion in \S\ref{sec:cyclicbivector}, a cross product multiplication table can be treated as assigning a basis vector to each basis bivector,
+\begin{equation}
+\bp{\bv[i]}{\bv[j]} \rightarrow \bv[k],
+\end{equation}
+with  $k\neq i,j$. 
+
+For geometric consistency under cyclic relabeling of the basis vectors, both the construction of the basis and the assignment must be rotationally symmetric on the graph. All such constructions correspond to assigning a cyclic order to the inscribed stars on the graph and a traversal direction for each, then for each bivector edge in one star, finding $\bv[k]$ by continuing one edge from $\bv[j]$ in the next star.
+
+%\subsection{Spaces that could admit a cross product}
 
 \begin{theorem}{Cross products can only be constructed on spaces with ``doubly odd" dimensions.}
 
