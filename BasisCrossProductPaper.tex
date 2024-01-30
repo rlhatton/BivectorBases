@@ -28,9 +28,11 @@ Closely related to the question of constructing cyclic bivector bases on a space
 
 Vector basis: Select a set of $n$ orthogonal unit vectors to define oriented directions. Any vector can thus be described as a sum of the 
 
-Bivector basis: A set of oriented planes defined by ordered pairs of elements from the vector basis. Canonically, the positive side of the bivector basis element  $\bp{\bv[a]}{\bv[b]}$ is the side from which $\bv[b]$ is seen as being at a counterclockwise right angle from $\bv[b]$.\footnote{This is the planar righthand rule for orientation (which is related to, but distinct from, the righthand rule for selecting a bivector basis discussed later in this section). Using a lefthanded rule in which $\bv[b]$ is clockwise from $\bv[a]$ changes the sign of the basis but also the signs of bivector-valued functions relative to the basis, so that calculations made with them remain unchanged.} For example, Figure~\ref{fig:lowdimensionalbases} illustrates two bivector bases in each of two-dimensional and three-dimensional space, where different choices of which basis vector in each pair is first in the bivector flip the bivector's orientation.
+Bivector basis: A set of oriented planes defined by ordered pairs of elements from the vector basis. Canonically, the positive side of the bivector basis element  $\bp{\bv[a]}{\bv[b]}$ is the side from which $\bv[b]$ is seen as being at a counterclockwise right angle from $\bv[b]$.\footnote{This is the planar righthand rule for orientation (which is related to, but distinct from, the righthand rule for selecting a bivector basis discussed below). Using a lefthanded rule in which $\bv[b]$ is clockwise from $\bv[a]$ changes the sign of the basis but also the signs of bivector-valued functions relative to the basis, so that calculations made with them remain unchanged.} For example, Figure~\ref{fig:lowdimensionalbases} illustrates two bivector bases in each of two-dimensional and three-dimensional space, where different choices of which basis vector in each pair is first in the bivector flip the bivector's orientation.
 
-\begin{figure}[htbp]
+The three-dimensional bivector bases illustrated in Figure~\ref{fig:lowdimensionalbases} are the two most commonly encountered, the \emph{right-hand rule basis} and the \emph{lexigraphic basis}. The right-hand rule basis is defined by using cyclic ordering to determine which vector comes first in each pair (one before two, two before three, and three before one), and has the property that when each pair of vectors is viewed from the planar-right-hand-rule perspective described above, the third basis vector points towards the viewer. The lexigraphic basis does not use cyclic ordering, instead taking one as being before three; as discussed below, this ordering is not as ``geometrically pure" as the right-hand-rule, but it is more generalizable when extending analysis beyond three dimensions
+
+\begin{figure}[tbp]
 \begin{center}
 \includegraphics[width=.75\textwidth]{Low-dimensionalbases}
 \caption{Bivector bases are composed of oriented sets of two basis vectors, and define oriented areas basis areas in the planes containing those vectors. The sign of this orientation depends on the order in which the basis vectors are paired, so that if $\bv[1]$ is pointing right and $\bv[2]$ is pointing out, we are viewing the positive side of $\bp{\bv[1]}{\bv[2]}$ and the negative side of $\bp{\bv[1]}{\bv[2]}$. Similarly, in three dimensions constructing the basis with the cyclic ordering $\bp{\bv[3]}{\bv[1]}$ or the lexigraphic ordering $\bp{\bv[1]}{\bv[3]}$ flips the sign of the corresponding bivector basis element.}
@@ -39,7 +41,15 @@ Bivector basis: A set of oriented planes defined by ordered pairs of elements fr
 \end{figure}
 
 
-On $n$-dimensional space, there are $n(n-1)$ pairs of basis vectors, each of which could be used in either order to construct the bivector basis, resulting in $2^{n(n-1)}$ possible sets of bivector bases corresponding to any given vector basis. A convenient visualization of 
+On $n$-dimensional space, there are $n(n-1)/2$ pairs of basis vectors, each of which could be used in either order to construct the bivector basis, resulting in $2^{n(n-1)/2}$ possible sets of bivector bases corresponding to any given vector basis. A convenient means of visualizing the construction of such bivector bases, especially in more than three dimensions, is as directed complete graphs on $n$-dimensional space, with each node representing a basis vector, each edge representing a pairing of basis vectors, and each direction specifying which of the vectors is first in the pairing. For example, the first two rows in Figure~\ref{fig:DirectedGraphBasis} correspond to the bases illustrated in Figure~\ref{fig:lowdimensionalbases}, and the third row illustrates two possible constructions of bivector bases in four dimensions, one formed by extending the three-dimensional right-hand-rule basis by adding a fourth basis vector placed after all of the other bases, and the second the lexographic basis.
+
+\begin{figure}[tbp]
+\begin{center}
+\includegraphics[width=.75\textwidth]{DirectedGraphBasis}
+\caption{Bivector bases on $n$-dimensional space can be thought of }
+\label{fig:DirectedGraphBasis}
+\end{center}
+\end{figure}
 
 %By convention, the reference-positive side of the plane defined by $\bv[a]$ and $\bv[b]$ is the side from which $\bv[b]$ is seen as being at a counterclockwise right angle from $\bv[b]$. If the bivector $\bp{\bv[a]}{\bv[b]}$ is positive, then its positive side matches the positive side of the reference basis; if it is negative then the positive and negative sides are flipped relative to the reference basis
 
